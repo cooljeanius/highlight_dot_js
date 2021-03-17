@@ -17,7 +17,6 @@ interface VuePlugin {
 interface PublicApi {
     highlight: (codeOrlanguageName: string, optionsOrCode: string | HighlightOptions, ignoreIllegals?: boolean, continuation?: Mode) => HighlightResult
     highlightAuto: (code: string, languageSubset?: string[]) => AutoHighlightResult
-    fixMarkup: (html: string) => string
     highlightBlock: (element: HTMLElement) => void
     highlightElement: (element: HTMLElement) => void
     configure: (options: Partial<HLJSOptions>) => void
@@ -122,8 +121,6 @@ interface HLJSOptions {
    noHighlightRe: RegExp
    languageDetectRe: RegExp
    classPrefix: string
-   tabReplace?: string
-   useBR: boolean
    languages?: string[]
    __emitter: EmitterConstructor
 }
