@@ -71,7 +71,7 @@
     "css": "^3.0.0",
     "css-color-names": "^1.0.1",
     "deep-freeze-es6": "^3.0.2",
-    "del": "^6.1.1",
+    "del": "^7.1.0",
     "dependency-resolver": "^2.0.1",
     "eslint": "^8.39.0",
     "eslint-config-standard": "^17.0.0",
