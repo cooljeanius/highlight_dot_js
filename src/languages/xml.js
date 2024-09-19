@@ -122,6 +122,7 @@ export default function(hljs) {
         /<!--/,
         /-->/,
         /--!>/,
+        /--!?>/,
         { relevance: 10 }
       ),
       {
