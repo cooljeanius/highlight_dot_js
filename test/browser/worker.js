@@ -8,10 +8,18 @@ describe('web worker', function() {
   before(async function() {
     this.hljsPath = await findLibrary();
     this.worker = new Worker(function() {
+      const authorizedScripts = [
+        'https://example.com/authorized-script1.js',
+        'https://example.com/authorized-script2.js'
+      ];
       self.onmessage = function(event) {
         if (event.data.action === 'importScript') {
-          importScripts(event.data.script);
-          postMessage(1);
+          if (authorizedScripts.includes(event.data.script)) {
+            importScripts(event.data.script);
+            postMessage(1);
+          } else {
+            postMessage('Unauthorized script');
+          }
         } else {
           var result = hljs.highlight(event.data, { language: 'javascript' });
           postMessage(result.value);
