@@ -107,8 +107,8 @@ export default function(hljs) {
       VAR,
       {
         className: 'variable',
-        begin: /\$[A-z]/,
-        end: /[^A-z]/
+        begin: /\$[A-Za-z]/,
+        end: /[^A-Za-z]/
       }
     ]
   };
