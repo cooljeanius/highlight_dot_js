@@ -48,7 +48,7 @@ export default function(hljs) {
     + '-split|-wildcard|-xor';
 
   const KEYWORDS = {
-    $pattern: /-?[A-z\.\-]+\b/,
+    $pattern: /-?[A-Za-z\.\-]+\b/,
     keyword:
       'if else foreach return do while until elseif begin for trap data dynamicparam '
       + 'end break throw param continue finally in switch exit filter try process catch '
