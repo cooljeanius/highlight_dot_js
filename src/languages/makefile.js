@@ -38,7 +38,7 @@ export default function(hljs) {
         + 'word wordlist firstword lastword dir notdir suffix basename '
         + 'addsuffix addprefix join wildcard realpath abspath error warning '
         + 'shell origin flavor foreach if or and call eval file value' },
-    contains: [ 
+    contains: [
       VARIABLE,
       QUOTE_STRING // Added QUOTE_STRING as they can be a part of functions
     ]

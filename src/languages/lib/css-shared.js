@@ -169,7 +169,7 @@ const SVG_TAGS = [
 
 export const TAGS = [
   ...HTML_TAGS,
-  ...SVG_TAGS,
+  ...SVG_TAGS
 ];
 
 // Sorting, then reversing makes sure longer attributes/elements like

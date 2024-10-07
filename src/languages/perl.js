@@ -274,7 +274,7 @@ export default function(hljs) {
         // negative look-ahead tries to avoid matching patterns that are not
         // Perl at all like $ident$, @ident@, etc.
         `(?![A-Za-z])(?![@$%])`
-        )
+          )
       },
       {
         // Only $= is a special Perl variable and one can't declare @= or %=.
@@ -299,7 +299,7 @@ export default function(hljs) {
       { match: /\b0b[0-1][0-1_]*\b/ },
     ],
     relevance: 0
-  }
+  };
   const STRING_CONTAINS = [
     hljs.BACKSLASH_ESCAPE,
     SUBST,

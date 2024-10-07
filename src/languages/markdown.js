@@ -217,7 +217,7 @@ export default function(hljs) {
   };
 
   const ENTITY = {
-    //https://spec.commonmark.org/0.31.2/#entity-references
+    // https://spec.commonmark.org/0.31.2/#entity-references
     scope: 'literal',
     match: /&([a-zA-Z0-9]+|#[0-9]{1,7}|#[Xx][0-9a-fA-F]{1,6});/
   };
