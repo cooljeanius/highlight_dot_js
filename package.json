@@ -59,6 +59,8 @@
   },
   "devDependencies": {
     "@colors/colors": "^1.6.0",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.12.0",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -80,6 +82,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "glob": "^8.1.0",
     "glob-promise": "^6.0.5",
+    "globals": "^15.10.0",
     "handlebars": "^4.7.8",
     "http-server": "^14.1.1",
     "jsdom": "^24.1.0",
