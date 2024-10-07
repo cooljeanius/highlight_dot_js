@@ -20,23 +20,24 @@ SQL is intended to highlight basic/common SQL keywords and expressions
 
  */
 
+// @ts-ignore
 export default function(hljs) {
   const regex = hljs.regex;
   const COMMENT_MODE = hljs.COMMENT('--', '$');
   const STRING = {
-    className: 'string',
+    scope: 'string',
     variants: [
       {
         begin: /'/,
         end: /'/,
-        contains: [ { begin: /''/ } ]
+        contains: [ { match: /''/ } ]
       }
     ]
   };
   const QUOTED_IDENTIFIER = {
     begin: /"/,
     end: /"/,
-    contains: [ { begin: /""/ } ]
+    contains: [ { match: /""/ } ]
   };
 
   const LITERALS = [
@@ -606,28 +607,55 @@ export default function(hljs) {
   });
 
   const VARIABLE = {
-    className: "variable",
-    begin: /@[a-z0-9][a-z0-9_]*/,
+    scope: "variable",
+    match: /@[a-z0-9][a-z0-9_]*/,
   };
 
   const OPERATOR = {
-    className: "operator",
-    begin: /[-+*/=%^~]|&&?|\|\|?|!=?|<(?:=>?|<|>)?|>[>=]?/,
+    scope: "operator",
+    match: /[-+*/=%^~]|&&?|\|\|?|!=?|<(?:=>?|<|>)?|>[>=]?/,
     relevance: 0,
   };
 
   const FUNCTION_CALL = {
-    begin: regex.concat(/\b/, regex.either(...FUNCTIONS), /\s*\(/),
+    match: regex.concat(/\b/, regex.either(...FUNCTIONS), /\s*\(/),
     relevance: 0,
     keywords: { built_in: FUNCTIONS }
   };
 
+  // turns a multi-word keyword combo into a regex that doesn't
+  // care about extra whitespace etc.
+  // input: "START QUERY"
+  // output: /\bSTART\s+QUERY\b/
+  // @ts-ignore
+  function kws_to_regex(list) {
+    return regex.concat(
+      /\b/,
+      // @ts-ignore
+      regex.either(...list.map((kw) => {
+        return kw.replace(/\s+/, "\\s+")
+      }
+      )
+      ),
+      /\b/
+    )
+  };
+
+  const MULTI_WORD_KEYWORDS = {
+    scope: "keyword",
+    match: kws_to_regex(COMBOS),
+    relevance: 0,
+  };
+
   // keywords with less than 3 letters are reduced in relevancy
+  // @ts-ignore
   function reduceRelevancy(list, {
+    // @ts-ignore
     exceptions, when
   } = {}) {
     const qualifyFn = when;
     exceptions = exceptions || [];
+    // @ts-ignore
     return list.map((item) => {
       if (item.match(/\|\d+$/) || exceptions.includes(item)) {
         return item;
@@ -647,6 +675,7 @@ export default function(hljs) {
     keywords: {
       $pattern: /\b[\w\.]+/,
       keyword:
+        // @ts-ignore
         reduceRelevancy(KEYWORDS, { when: (x) => x.length < 3 }),
       literal: LITERALS,
       type: TYPES,
@@ -654,19 +683,10 @@ export default function(hljs) {
     },
     contains: [
       {
-        begin: regex.either(...COMBOS),
-        relevance: 0,
-        keywords: {
-          $pattern: /[\w\.]+/,
-          keyword: KEYWORDS.concat(COMBOS),
-          literal: LITERALS,
-          type: TYPES
-        },
+        scope: "type",
+        match: kws_to_regex(MULTI_WORD_TYPES)
       },
-      {
-        className: "type",
-        begin: regex.either(...MULTI_WORD_TYPES)
-      },
+      MULTI_WORD_KEYWORDS,
       FUNCTION_CALL,
       VARIABLE,
       STRING,
