@@ -631,12 +631,11 @@ export default function(hljs) {
       /\b/,
       regex.either(...list.map((kw) => {
         return kw.replace(/\s+/, "\\s+")
-      }
-      )
-      ),
+      };
+      )),
       /\b/
-    )
-  };
+    );
+  }
 
   const MULTI_WORD_KEYWORDS = {
     scope: "keyword",
