@@ -1,3 +1,4 @@
+---
 name: Release
 
 on:
@@ -23,11 +24,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Tag is ${{ github.ref }}.
-        # we have to repeat ourselves here since the environment is not actually updated
-        # until the next step executes, so we can't access $TAG_NAME yet
+        # we have to repeat ourselves here since the environment is not actually
+        # updated
+        # until the next step executes, so we cannot access $TAG_NAME yet
         run: |
-          echo "TAG_NAME=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-          echo "MAJOR_VERSION=$(echo ${GITHUB_REF/refs\/tags\//} | cut -d'.' -f1)" >> $GITHUB_ENV
+          echo "TAG_NAME=${GITHUB_REF/refs\/tags\//}" >> "${GITHUB_ENV}"
+          echo "MAJOR_VERSION=$(echo "${GITHUB_REF/refs\/tags\//}" | cut -d'.' -f1)" \
+            >> "${GITHUB_ENV}"
       - name: Make sure we are pushing a tag...
         if: ${{ !contains(github.ref,'refs/tags/') }}
         run: false
@@ -35,13 +38,13 @@ jobs:
 
       - if: contains(github.ref, 'beta') || contains(github.ref, 'pre') || contains(github.ref, 'alpha')
         run: |
-          echo "NPM_TAG=beta" >> $GITHUB_ENV
-          echo "RELEASING=beta" >> $GITHUB_ENV
+          echo "NPM_TAG=beta" >> "${GITHUB_ENV}"
+          echo "RELEASING=beta" >> "${GITHUB_ENV}"
 
       - if: ${{ !(contains(github.ref, 'beta') || contains(github.ref, 'pre') || contains(github.ref, 'alpha')) }}
         run: |
-          echo "NPM_TAG=latest" >> $GITHUB_ENV
-          echo "RELEASING=stable" >> $GITHUB_ENV
+          echo "NPM_TAG=latest" >> "${GITHUB_ENV}"
+          echo "RELEASING=stable" >> "${GITHUB_ENV}"
 
       - name: match-tag-to-package-version
         uses: geritol/match-tag-to-package-version@0.2.0
@@ -74,15 +77,15 @@ jobs:
         # if stable release
       - name: Stable Release
         if: env.RELEASING == 'stable'
-        run: echo "BRANCH_NAME=${MAJOR_VERSION}-stable" >> $GITHUB_ENV
+        run: echo "BRANCH_NAME=${MAJOR_VERSION}-stable" >> "${GITHUB_ENV}"
         # else (beta)
       - name: Beta Release
         if: env.RELEASING == 'beta'
-        run: echo "BRANCH_NAME=main" >> $GITHUB_ENV
+        run: echo "BRANCH_NAME=main" >> "${GITHUB_ENV}"
       - name: Confirm release is either stable or beta
         if: ${{ !(env.RELEASING == 'stable' || env.RELEASING == 'beta') }}
         run: |
-          echo We seem to be releasing `${RELEASING}`.
+          echo "We seem to be releasing $(${RELEASING})."
           false
 
       - name: Checkout cdn-release
@@ -106,9 +109,9 @@ jobs:
           git config user.email github-actions@github.com
           git add ./build/
           git add ./DIGESTS.md
-          git commit -m'Update to version ${{ env.TAG_NAME }}'
-          git tag ${TAG_NAME}
-          git push -f --atomic origin ${BRANCH_NAME} ${TAG_NAME}
+          git commit -m 'Update to version ${{ env.TAG_NAME }}'
+          git tag "${TAG_NAME}"
+          git push -f --atomic origin "${BRANCH_NAME}" "${TAG_NAME}"
 
       - name: Publish cdn-assets to NPM
         id: publish_cdn
