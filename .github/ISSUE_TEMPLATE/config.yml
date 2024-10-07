@@ -1,8 +1,10 @@
+---
 blank_issues_enabled: false
 contact_links:
   - name: Join our friendly Discord community
     url: https://discord.gg/M24EbU7ja9
-    about: If you'd like to hang out, help out, or need some help - we're here.
+    about: |
+      If you would like to hang out, help out, or need some help - we are here.
   - name: Read our documentation
     url: https://highlightjs.readthedocs.io/
     about: Sometimes the answers are right there, just waiting to be discovered.

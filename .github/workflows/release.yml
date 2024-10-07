@@ -15,7 +15,7 @@ permissions:
 jobs:
   prerelease:
     permissions:
-      contents: write # for git push
+      contents: write  # for git push
 
     name: Release
     runs-on: ubuntu-latest
@@ -49,7 +49,7 @@ jobs:
       - name: match-tag-to-package-version
         uses: geritol/match-tag-to-package-version@0.2.0
         env:
-          TAG_PREFIX: refs/tags/ # Optional, default prefix refs/tags/
+          TAG_PREFIX: refs/tags/  # Optional, default prefix refs/tags/
 
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
@@ -121,23 +121,3 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./cdn-release/build/package.json
           tag: ${{ env.NPM_TAG }}
-
-        # log.info('Updating CDN repo at %s' % settings.HLJS_CDN_SOURCE)
-        # run(['nodejs', 'tools/build.js', '--target', 'cdn', ':common'])
-        # os.chdir(settings.HLJS_CDN_SOURCE)
-        # run(['git', 'pull', '-f'])
-        # lines = run(['git', '--git-dir', os.path.join(settings.HLJS_CDN_SOURCE, '.git'), 'tag'])
-        # build_dir = os.path.join(settings.HLJS_CDN_SOURCE, 'build')
-        # if version in lines:
-        #     log.info('Tag %s already exists in the local CDN repo' % version)
-        # else:
-        #     if os.path.exists(build_dir):
-        #         shutil.rmtree(build_dir)
-        #     shutil.move(os.path.join(settings.HLJS_SOURCE, 'build'), build_dir)
-        #     run(['git', 'add', '.'])
-        #     run(['git', 'commit', '-m', 'Update to version %s' % version])
-        #     run(['git', 'tag', version])
-        # run(['git', 'push'])
-        # run(['git', 'push', '--tags'])
-        # npm_publish(build_dir)
-        # os.chdir(settings.HLJS_SOURCE)
