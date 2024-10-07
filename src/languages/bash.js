@@ -45,9 +45,7 @@ export default function(hljs) {
         /(^|\s)/,
         /#.*$/
       ],
-      scope: {
-        2: 'comment'
-      }
+      scope: { 2: 'comment' }
     }
   );
   const HERE_DOC = {
@@ -71,17 +69,13 @@ export default function(hljs) {
     ]
   };
   SUBST.contains.push(QUOTE_STRING);
-  const ESCAPED_QUOTE = {
-    match: /\\"/
-  };
+  const ESCAPED_QUOTE = { match: /\\"/ };
   const APOS_STRING = {
     className: 'string',
     begin: /'/,
     end: /'/
   };
-  const ESCAPED_APOS = {
-    match: /\\'/
-  };
+  const ESCAPED_APOS = { match: /\\'/ };
   const ARITHMETIC = {
     begin: /\$?\(\(/,
     end: /\)\)/,

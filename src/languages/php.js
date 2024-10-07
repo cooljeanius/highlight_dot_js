@@ -29,10 +29,16 @@ export default function(hljs) {
   const PREPROCESSOR = {
     scope: 'meta',
     variants: [
-      { begin: /<\?php/, relevance: 10 }, // boost for obvious PHP
+      {
+        begin: /<\?php/,
+        relevance: 10
+      }, // boost for obvious PHP
       { begin: /<\?=/ },
       // less relevant per PSR-1 which says not to use short-tags
-      { begin: /<\?/, relevance: 0.1 },
+      {
+        begin: /<\?/,
+        relevance: 0.1
+      },
       { begin: /\?>/ } // end php tag
     ]
   };

@@ -4,8 +4,8 @@ const utility = require('../utility');
 
 describe('ends with parent variants', () => {
   before(() => {
-    const filename = utility.buildPath('fixtures', 'expect', 'endsWithParentVariants.txt'),
-          testHTML = document.querySelectorAll('#ends-with-parent-variants .hljs');
+    const filename = utility.buildPath('fixtures', 'expect', 'endsWithParentVariants.txt');
+    const testHTML = document.querySelectorAll('#ends-with-parent-variants .hljs');
 
     return utility.setupFile(filename, 'utf-8', this, testHTML);
   });
@@ -15,5 +15,4 @@ describe('ends with parent variants', () => {
 
     actual.should.equal(this.expected);
   });
-
 });

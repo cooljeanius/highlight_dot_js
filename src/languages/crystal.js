@@ -53,8 +53,8 @@ export default function(hljs) {
     const
         contains = [
           {
-            begin: begin,
-            end: end
+            begin,
+            end
           }
         ];
     contains[0].contains = contains;

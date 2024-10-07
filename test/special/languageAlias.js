@@ -11,8 +11,8 @@ describe('language alias', () => {
 
   it('should highlight as aliased language', () => {
     const filename = utility.buildPath('fixtures', 'expect',
-                                       'languagealias.txt'),
-          actual   = this.blocks[0];
+      'languagealias.txt');
+    const actual = this.blocks[0];
 
     return utility.expectedFile(filename, 'utf-8', actual);
   });

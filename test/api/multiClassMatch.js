@@ -74,8 +74,8 @@ describe('multi-class matchers', () => {
     const result = hljs.highlight(code, { language: 'test' });
 
     result.value.should.equal(
-      `<span class="hljs-carrot">^^^what ` +
-      `<span class="hljs-a">a</span>b<span class="hljs-c">c</span>` +
-      ` now^^^</span>`);
-  })
+      `<span class="hljs-carrot">^^^what `
+      + `<span class="hljs-a">a</span>b<span class="hljs-c">c</span>`
+      + ` now^^^</span>`);
+  });
 });

@@ -47,7 +47,7 @@ export default function(hljs) {
 
   return {
     name: 'Protocol Buffers',
-    aliases: ['proto'],
+    aliases: [ 'proto' ],
     keywords: {
       keyword: KEYWORDS,
       type: TYPES,

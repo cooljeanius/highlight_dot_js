@@ -88,10 +88,10 @@ export default function(hljs) {
         excludeBegin: true,
         excludeEnd: true,
         relevance: 0,
-        contains: [ 
-          TYPE, 
-          hljs.C_LINE_COMMENT_MODE, 
-          hljs.C_BLOCK_COMMENT_MODE, 
+        contains: [
+          TYPE,
+          hljs.C_LINE_COMMENT_MODE,
+          hljs.C_BLOCK_COMMENT_MODE,
         ]
       },
       {
@@ -101,10 +101,10 @@ export default function(hljs) {
         excludeBegin: true,
         excludeEnd: true,
         relevance: 0,
-        contains: [ 
-          TYPE, 
-          hljs.C_LINE_COMMENT_MODE, 
-          hljs.C_BLOCK_COMMENT_MODE, 
+        contains: [
+          TYPE,
+          hljs.C_LINE_COMMENT_MODE,
+          hljs.C_BLOCK_COMMENT_MODE,
         ]
       },
       NAME
@@ -164,7 +164,7 @@ export default function(hljs) {
   const DIRECTIVE_VALUE = {
     className: 'string',
     begin: /\S+/,
-  }
+  };
 
   // directives
   // sourced from https://github.com/scala/docs.scala-lang/pull/2845
@@ -182,10 +182,8 @@ export default function(hljs) {
       5: "type"
     },
     end: /$/,
-    contains: [
-      DIRECTIVE_VALUE,
-    ]
-  }
+    contains: [ DIRECTIVE_VALUE, ]
+  };
 
   return {
     name: 'Scala',

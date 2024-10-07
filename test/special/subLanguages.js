@@ -9,8 +9,8 @@ describe('sub-languages', () => {
 
   it('should highlight XML with PHP and JavaScript', () => {
     const filename = utility.buildPath('fixtures', 'expect',
-                                     'sublanguages.txt'),
-          actual   = this.block.innerHTML;
+      'sublanguages.txt');
+    const actual = this.block.innerHTML;
 
     return utility.expectedFile(filename, 'utf-8', actual);
   });

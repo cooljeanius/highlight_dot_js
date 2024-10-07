@@ -189,8 +189,8 @@ export default function(hljs) {
     const mode = hljs.inherit(
       {
         className: "function",
-        beginKeywords: beginKeywords,
-        end: end,
+        beginKeywords,
+        end,
         excludeEnd: true,
         contains: [].concat(PARSE_PARAMS)
       },

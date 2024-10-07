@@ -6,20 +6,20 @@
  */
 function isAlwaysZeroWidth(element) {
   switch (element.type) {
-    case 'Assertion':
-      // assertions == ^, $, \b, lookarounds
-      return true;
-    case 'Quantifier':
-      return element.max === 0 || isAlwaysZeroWidth(element.element);
-    case 'CapturingGroup':
-    case 'Group':
-      // every element in every alternative has to be of zero length
-      return element.alternatives.every(alt => alt.elements.every(isAlwaysZeroWidth));
-    case 'Backreference':
-      // on if the group referred to is of zero length
-      return isAlwaysZeroWidth(element.resolved);
-    default:
-      return false; // what's left are characters
+  case 'Assertion':
+    // assertions == ^, $, \b, lookarounds
+    return true;
+  case 'Quantifier':
+    return element.max === 0 || isAlwaysZeroWidth(element.element);
+  case 'CapturingGroup':
+  case 'Group':
+    // every element in every alternative has to be of zero length
+    return element.alternatives.every(alt => alt.elements.every(isAlwaysZeroWidth));
+  case 'Backreference':
+    // on if the group referred to is of zero length
+    return isAlwaysZeroWidth(element.resolved);
+  default:
+    return false; // what's left are characters
   }
 }
 
@@ -32,27 +32,27 @@ function isAlwaysZeroWidth(element) {
 function isFirstMatch(element) {
   const parent = element.parent;
   switch (parent.type) {
-    case 'Alternative':
-      // all elements before this element have to of zero length
-      if (!parent.elements.slice(0, parent.elements.indexOf(element)).every(isAlwaysZeroWidth)) {
-        return false;
-      }
-      const grandParent = parent.parent;
-      if (grandParent.type === 'Pattern') {
-        return true;
-      } else {
-        return isFirstMatch(grandParent);
-      }
+  case 'Alternative':
+    // all elements before this element have to of zero length
+    if (!parent.elements.slice(0, parent.elements.indexOf(element)).every(isAlwaysZeroWidth)) {
+      return false;
+    }
+    const grandParent = parent.parent;
+    if (grandParent.type === 'Pattern') {
+      return true;
+    } else {
+      return isFirstMatch(grandParent);
+    }
 
-    case 'Quantifier':
-      if (parent.max >= 2) {
-        return false;
-      } else {
-        return isFirstMatch(parent);
-      }
+  case 'Quantifier':
+    if (parent.max >= 2) {
+      return false;
+    } else {
+      return isFirstMatch(parent);
+    }
 
-    default:
-      throw new Error(`Internal error: The given node should not be a '${element.type}'.`);
+  default:
+    throw new Error(`Internal error: The given node should not be a '${element.type}'.`);
   }
 }
 
@@ -84,4 +84,4 @@ function firstOf(iter) {
   return undefined;
 }
 
-module.exports = { firstOf, underAStar, isFirstMatch, isAlwaysZeroWidth};
+module.exports = { firstOf, underAStar, isFirstMatch, isAlwaysZeroWidth };

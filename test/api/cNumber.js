@@ -1,9 +1,9 @@
 'use strict';
 
-const _       = require('lodash');
-const hljs    = require('../../build');
+const _ = require('lodash');
+const hljs = require('../../build');
 
-const pattern      = new RegExp(`${hljs.C_NUMBER_RE}$`);
+const pattern = new RegExp(`${hljs.C_NUMBER_RE}$`);
 
 describe('.C_NUMBER_RE', () => {
   it('should match regular numbers', () => {
@@ -13,7 +13,7 @@ describe('.C_NUMBER_RE', () => {
   });
 
   it('should match decimals', () => {
-    const decimal       = _.range(0, 1.001, 0.001).map(x => x.toString());
+    const decimal = _.range(0, 1.001, 0.001).map(x => x.toString());
     const noLeadingZero = ['.1234', '.5206', '.0002', '.9998'];
 
     const numbers = [].concat(decimal, noLeadingZero);
@@ -22,9 +22,9 @@ describe('.C_NUMBER_RE', () => {
   });
 
   it('should match hex numbers', () => {
-    const numbers = [ '0xbada55', '0xfa1755', '0x45362e', '0xfedcba'
-                    , '0x123456', '0x00000f', '0xfff000', '0xf0e1d2'
-                    ];
+    const numbers = ['0xbada55', '0xfa1755', '0x45362e', '0xfedcba',
+      '0x123456', '0x00000f', '0xfff000', '0xf0e1d2'
+    ];
 
     numbers.should.matchEach(pattern);
   });

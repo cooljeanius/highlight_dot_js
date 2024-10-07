@@ -90,26 +90,46 @@ export default function(hljs) {
     contains: [ hljs.BACKSLASH_ESCAPE ],
     variants: [
       { match: /~\w?"""("*)(?!")[\s\S]*?"""\1/ },
-      { begin: /~\w?\(/,
-        end: /\)/ },
-      { begin: /~\w?\[/,
-        end: /\]/ },
-      { begin: /~\w?{/,
-        end: /}/ },
-      { begin: /~\w?</,
-        end: />/ },
-      { begin: /~\w?\//,
-        end: /\// },
-      { begin: /~\w?\|/,
-        end: /\|/ },
-      { begin: /~\w?'/,
-        end: /'/ },
-      { begin: /~\w?"/,
-        end: /"/ },
-      { begin: /~\w?`/,
-        end: /`/ },
-      { begin: /~\w?#/,
-        end: /#/ },
+      {
+        begin: /~\w?\(/,
+        end: /\)/
+      },
+      {
+        begin: /~\w?\[/,
+        end: /\]/
+      },
+      {
+        begin: /~\w?{/,
+        end: /}/
+      },
+      {
+        begin: /~\w?</,
+        end: />/
+      },
+      {
+        begin: /~\w?\//,
+        end: /\//
+      },
+      {
+        begin: /~\w?\|/,
+        end: /\|/
+      },
+      {
+        begin: /~\w?'/,
+        end: /'/
+      },
+      {
+        begin: /~\w?"/,
+        end: /"/
+      },
+      {
+        begin: /~\w?`/,
+        end: /`/
+      },
+      {
+        begin: /~\w?#/,
+        end: /#/
+      },
     ],
   };
 

@@ -7,7 +7,6 @@ Category: functional
 */
 
 export default function(hljs) {
-
   /* See:
      - https://www.haskell.org/onlinereport/lexemes.html
      - https://downloads.haskell.org/ghc/9.0.1/docs/html/users_guide/exts/binary_literals.html
@@ -19,7 +18,7 @@ export default function(hljs) {
   const binaryDigits = '([01]_*)+';
   const octalDigits = '([0-7]_*)+';
   const ascSymbol = '[!#$%&*+.\\/<=>?@\\\\^~-]';
-  const uniSymbol = '(\\p{S}|\\p{P})' // Symbol or Punctuation
+  const uniSymbol = '(\\p{S}|\\p{P})'; // Symbol or Punctuation
   const special = '[(),;\\[\\]`|{}]';
   const symbol = `(${ascSymbol}|(?!(${special}|[_:"']))${uniSymbol})`;
 
@@ -206,7 +205,7 @@ export default function(hljs) {
       CONSTRUCTOR,
       hljs.inherit(hljs.TITLE_MODE, { begin: '^[_a-z][\\w\']*' }),
       // No markup, prevents infix operators from being recognized as comments.
-      { begin: `(?!-)${symbol}--+|--+(?!-)${symbol}`},
+      { begin: `(?!-)${symbol}--+|--+(?!-)${symbol}` },
       COMMENT,
       { // No markup, relevance booster
         begin: '->|<-' }

@@ -1,14 +1,14 @@
 'use strict';
 
-const hljs     = require('../../build');
+const hljs = require('../../build');
 hljs.debugMode(); // tests run in debug mode so errors are raised
 
 const { JSDOM } = require('jsdom');
 const { readFile } = require('fs').promises;
-const utility  = require('../utility');
+const utility = require('../utility');
 
 describe('special cases tests', () => {
-  before(async () => {
+  before(async() => {
     const filename = utility.buildPath('fixtures', 'index.html');
     const page = await readFile(filename, 'utf-8');
     const { window } = await new JSDOM(page);
@@ -36,5 +36,5 @@ describe('special cases tests', () => {
   require('./noHighlight');
   require('./subLanguages');
   require('./buildClassName');
-  require('./endsWithParentVariants')
+  require('./endsWithParentVariants');
 });

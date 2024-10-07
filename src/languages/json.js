@@ -35,9 +35,7 @@ export default function(hljs) {
   return {
     name: 'JSON',
     aliases: [ 'jsonc' ],
-    keywords:{
-      literal: LITERALS,
-    },
+    keywords: { literal: LITERALS, },
     contains: [
       ATTRIBUTE,
       PUNCTUATION,

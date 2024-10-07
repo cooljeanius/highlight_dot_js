@@ -1,12 +1,12 @@
 module.exports = function(hljs) {
-  var BODY = {
+  const BODY = {
     className: 'body', endsWithParent: true
   };
-  var LIST = {
+  const LIST = {
     className: 'list',
     variants: [
-      {begin: /\(/, end: /\)/},
-      {begin: /\[/, end: /\]/}
+      { begin: /\(/, end: /\)/ },
+      { begin: /\[/, end: /\]/ }
     ],
     contains: [BODY]
   };
@@ -14,5 +14,5 @@ module.exports = function(hljs) {
   return {
     disableAutodetect: true,
     contains: [LIST]
-  }
+  };
 };

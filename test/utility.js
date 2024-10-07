@@ -1,12 +1,12 @@
 'use strict';
 
 const { readFile } = require('fs').promises;
-const path     = require('path');
+const path = require('path');
 
 // Build a path relative to `test/`
 exports.buildPath = function() {
-  const args  = [...arguments],
-        paths = [__dirname].concat(args);
+  const args = [...arguments];
+  const paths = [__dirname].concat(args);
 
   return path.join.apply(this, paths);
 };
@@ -20,6 +20,6 @@ exports.setupFile = (filename, encoding, that, testHTML) => {
   return readFile(filename, encoding)
     .then(expected => {
       that.expected = expected.trim();
-      that.blocks   = [...testHTML].map(x => x.innerHTML);
+      that.blocks = [...testHTML].map(x => x.innerHTML);
     });
 };

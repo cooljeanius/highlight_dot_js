@@ -56,15 +56,15 @@ function itemChanges(baseList, newList) {
   const baseSet = new Set(baseList);
   const newSet = new Set(newList);
 
-  let added = [];
+  const added = [];
   for (const str of newList) {
     if (!baseSet.has(str)) {
       added.push(str);
     }
   }
 
-  let changed = [];
-  let removed = [];
+  const changed = [];
+  const removed = [];
   for (const str of baseList) {
     newSet.has(str) ? changed.push(str) : removed.push(str);
   }
@@ -72,14 +72,14 @@ function itemChanges(baseList, newList) {
   return {
     added,
     changed,
-    removed,
+    removed
   };
 }
 
 function reportHeader() {
   return (
-    "# Build Size Report\n\n" +
-    "Changes to minified artifacts in `/build`, after **gzip** compression."
+    "# Build Size Report\n\n"
+    + "Changes to minified artifacts in `/build`, after **gzip** compression."
   );
 }
 
@@ -166,7 +166,7 @@ async function createReport() {
   const {
     added: addedFiles,
     removed: removedFiles,
-    changed: changedFiles,
+    changed: changedFiles
   } = itemChanges(baseFiles, prFiles);
 
   let md = reportHeader();
@@ -187,6 +187,6 @@ async function createReport() {
   return md;
 }
 
-(async () => {
+(async() => {
   console.log(await createReport());
 })();

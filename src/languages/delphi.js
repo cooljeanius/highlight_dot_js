@@ -173,7 +173,8 @@ export default function(hljs) {
       {
         // Hexadecimal literal with no digits
         match: /\$/,
-        relevance: 0 },
+        relevance: 0
+      },
       {
         // Octal notation, e.g., &42.
         match: /&[0-7][0-7_]*/ },
@@ -183,7 +184,8 @@ export default function(hljs) {
       {
         // Binary literal with no digits
         match: /%/,
-        relevance: 0 }
+        relevance: 0
+      }
     ]
   };
   const CHAR_STRING = {

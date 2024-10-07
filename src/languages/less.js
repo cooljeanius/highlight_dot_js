@@ -32,8 +32,8 @@ export default function(hljs) {
   const IDENT_MODE = function(name, begin, relevance) {
     return {
       className: name,
-      begin: begin,
-      relevance: relevance
+      begin,
+      relevance
     };
   };
 
@@ -177,7 +177,7 @@ export default function(hljs) {
       MIXIN_GUARD_MODE,
       IDENT_MODE('keyword', 'all\\b'),
       IDENT_MODE('variable', '@\\{' + IDENT_RE + '\\}'), // otherwise it’s identified as tag
-      
+
       {
         begin: '\\b(' + css.TAGS.join('|') + ')\\b',
         className: 'selector-tag'

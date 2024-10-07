@@ -1,8 +1,8 @@
 'use strict';
 
-const Worker   = require('tiny-worker');
+const Worker = require('tiny-worker');
 
-const { defaultCase, findLibrary } = require('./test_case')
+const { defaultCase, findLibrary } = require('./test_case');
 
 describe('web worker', function() {
   before(async function() {
@@ -13,7 +13,7 @@ describe('web worker', function() {
           importScripts(event.data.script);
           postMessage(1);
         } else {
-          var result = hljs.highlight(event.data, { language: 'javascript' });
+          const result = hljs.highlight(event.data, { language: 'javascript' });
           postMessage(result.value);
         }
       };
@@ -33,9 +33,9 @@ describe('web worker', function() {
 
       // the &quot; will be encoded since it's not being
       // filtered by the browsers innerHTML implementation
-      const expect = '<span class="hljs-keyword">' +
-        'var</span> say = <span class="hljs-string">' +
-        '&quot;Hello&quot;</span>;';
+      const expect = '<span class="hljs-keyword">'
+        + 'var</span> say = <span class="hljs-string">'
+        + '&quot;Hello&quot;</span>;';
       actual.should.equal(expect);
 
       done();

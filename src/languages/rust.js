@@ -240,9 +240,7 @@ export default function(hljs) {
             className: 'string',
             begin: /"/,
             end: /"/,
-            contains: [
-              hljs.BACKSLASH_ESCAPE
-            ]
+            contains: [ hljs.BACKSLASH_ESCAPE ]
           }
         ]
       },

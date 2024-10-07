@@ -208,9 +208,7 @@ export default function(hljs) {
           /\s+/,
           hljs.UNDERSCORE_IDENT_RE
         ],
-        beginScope: {
-          3: "title.class"
-        },
+        beginScope: { 3: "title.class" },
         keywords: 'class interface trait',
         end: /[:\{(]|$/,
         excludeEnd: true,

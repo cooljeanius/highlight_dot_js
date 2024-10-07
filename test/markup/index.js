@@ -8,13 +8,13 @@ const utility = require('../utility');
 
 hljs.debugMode();
 
-const { getThirdPartyPackages } = require("../../tools/lib/external_language")
+const { getThirdPartyPackages } = require("../../tools/lib/external_language");
 
-function testLanguage(language, {testDir}) {
+function testLanguage(language, { testDir }) {
   describe(language, function() {
-    const where = testDir ?
-      path.join(testDir, '*.expect.txt') :
-      utility.buildPath('markup', language, '*.expect.txt');
+    const where = testDir
+      ? path.join(testDir, '*.expect.txt')
+      : utility.buildPath('markup', language, '*.expect.txt');
     const filePath = where;
     const filenames = glob.sync(filePath, { windowsPathsNoEscape: true });
 
@@ -35,7 +35,7 @@ function testLanguage(language, {testDir}) {
 
           actual.trim().should.equal(expected.trim());
           done();
-        }).catch(function(err) { return done(err) });
+        }).catch(function(err) { return done(err); });
       });
     });
   });

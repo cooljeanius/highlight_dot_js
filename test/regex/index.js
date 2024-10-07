@@ -4,7 +4,7 @@ const hljs = require('../../build');
 const { BFS, parseRegex, regexFor } = require('./lib/util.js');
 const { visitRegExpAST } = require('regexpp');
 const { JS, Words, NFA, CharSet } = require('refa');
-const { firstOf, underAStar, isFirstMatch, isAlwaysZeroWidth} = require('./lib/analysis.js');
+const { firstOf, underAStar, isFirstMatch, isAlwaysZeroWidth } = require('./lib/analysis.js');
 
 hljs.debugMode();
 
@@ -25,7 +25,7 @@ const polyBacktrackingCache = {};
 function retrieveRules(language, { name }) {
   // first we need to get the language compiled so we have
   // access to the raw regex
-  hljs.highlight("", {language: name});
+  hljs.highlight("", { language: name });
   return regexFor(language, { context: name, depth: 0 });
 }
 
@@ -40,7 +40,7 @@ function forEachPattern(list, fn) {
       rulePath: rule.path,
       reportError: message => errors.push(message)
     });
-  };
+  }
   if (errors.length > 0) {
     throw new Error(errors.map(e => String(e.message || e)).join('\n\n'));
   }
@@ -63,24 +63,24 @@ function testLanguage(languageName) {
     //   });
     // });
 
-    it(`have ${rules.length} regex matchers`, () => {} );
+    it(`have ${rules.length} regex matchers`, () => {});
 
     it('should not use octal escapes', function() {
       forEachPattern(rules, ({ ast, rulePath, reportError }) => {
         visitRegExpAST(ast.pattern, {
           onCharacterEnter(node) {
             if (/^\\(?:[1-9]|\d{2,})$/.test(node.raw)) {
-              reportError(`${rulePath}: Octal escape ${node.raw}.\n\n` +
-                `Octal escapes can be confused with backreferences, so please do not use them.\n` +
-                `To fix this, use a different escape method. ` +
-                `Note that this could also be an invalid backreference, so be sure to carefully analyse the pattern.`);
+              reportError(`${rulePath}: Octal escape ${node.raw}.\n\n`
+                + `Octal escapes can be confused with backreferences, so please do not use them.\n`
+                + `To fix this, use a different escape method. `
+                + `Note that this could also be an invalid backreference, so be sure to carefully analyse the pattern.`);
             }
           }
         });
       });
     });
 
-    it('should not cause exponential backtracking', function () {
+    it('should not cause exponential backtracking', function() {
       forEachPattern(rules, ({ pattern, ast, rulePath, reportError }) => {
         const patternStr = String(pattern);
         if (expBacktrackingCache[patternStr] === false) {
@@ -98,7 +98,7 @@ function testLanguage(languageName) {
         function toNFA(element, debug = false) {
           const { expression, maxCharacter } = parser.parseElement(element, {
             backreferences: "resolve",
-            lookarounds: "disable",
+            lookarounds: "disable"
           });
           return NFA.fromRegex(expression, { maxCharacter });
         }
@@ -195,13 +195,13 @@ function testLanguage(languageName) {
                 + ` A maintainer will help you.`
                 + `\n\nFull pattern:\n${pattern}`);
             }
-          },
+          }
         });
 
         expBacktrackingCache[patternStr] = false;
       });
     });
-    it('should not cause polynomial backtracking', function () {
+    it('should not cause polynomial backtracking', function() {
       forEachPattern(rules, ({ pattern, ast, rulePath, reportError }) => {
         const patternStr = String(pattern);
         if (polyBacktrackingCache[patternStr] === false) {
@@ -217,43 +217,43 @@ function testLanguage(languageName) {
          */
         function toCharSet(node) {
           switch (node.type) {
-            case "Alternative": {
-              if (node.elements.length === 1) {
-                return toCharSet(node.elements[0]);
-              }
-              return EMPTY;
+          case "Alternative": {
+            if (node.elements.length === 1) {
+              return toCharSet(node.elements[0]);
             }
-            case "CapturingGroup":
-            case "Group": {
-              let total = EMPTY;
-              for (const item of node.alternatives) {
-                total = total.union(toCharSet(item));
-              }
-              return total;
+            return EMPTY;
+          }
+          case "CapturingGroup":
+          case "Group": {
+            let total = EMPTY;
+            for (const item of node.alternatives) {
+              total = total.union(toCharSet(item));
             }
-            case "Character":
-              return JS.createCharSet([node.value], ast.flags);
-            case "CharacterClass": {
-              const value = JS.createCharSet(node.elements.map(x => {
-                if (x.type === "CharacterSet") {
-                  return x;
-                } else if (x.type === "Character") {
-                  return x.value;
-                } else {
-                  return { min: x.min.value, max: x.max.value };
-                }
-              }), ast.flags);
-              if (node.negate) {
-                return value.negate();
+            return total;
+          }
+          case "Character":
+            return JS.createCharSet([node.value], ast.flags);
+          case "CharacterClass": {
+            const value = JS.createCharSet(node.elements.map(x => {
+              if (x.type === "CharacterSet") {
+                return x;
+              } else if (x.type === "Character") {
+                return x.value;
               } else {
-                return value;
+                return { min: x.min.value, max: x.max.value };
               }
+            }), ast.flags);
+            if (node.negate) {
+              return value.negate();
+            } else {
+              return value;
             }
-            case "CharacterSet":
-              return JS.createCharSet([node], ast.flags);
+          }
+          case "CharacterSet":
+            return JS.createCharSet([node], ast.flags);
 
-            default:
-              return EMPTY;
+          default:
+            return EMPTY;
           }
         }
 
@@ -305,7 +305,7 @@ function testLanguage(languageName) {
                     elements: [
                       { type: "CharacterClass", characters: intersection }
                     ]
-                  })
+                  });
                   const lang = `/${literal.source}/${literal.flags}`;
 
                   const rangeStr = patternStr.substring(node.start + 1, quantifier.end + 1);
@@ -344,46 +344,46 @@ function testLanguage(languageName) {
              */
             function goInto(element, after, char) {
               switch (element.type) {
-                case "Assertion": {
-                  if (element.kind === "lookahead" || element.kind === "lookbehind") {
-                    for (const alt of element.alternatives) {
-                      if (alt.elements.length > 0) {
-                        tryReachUntil(alt.elements[0], char, after);
-                      }
-                    }
-                  }
-                  return EMPTY;
-                }
-                case "Group":
-                case "CapturingGroup": {
-                  let total = EMPTY;
+              case "Assertion": {
+                if (element.kind === "lookahead" || element.kind === "lookbehind") {
                   for (const alt of element.alternatives) {
                     if (alt.elements.length > 0) {
-                      total = total.union(tryReachUntil(alt.elements[0], char, after));
-                    } else {
-                      total = char;
+                      tryReachUntil(alt.elements[0], char, after);
                     }
                   }
-                  return total;
                 }
-                case "Character":
-                case "CharacterClass":
-                case "CharacterSet": {
-                  return char.intersect(toCharSet(element));
-                }
-                case "Quantifier": {
-                  if (element.min === 0) {
-                    goInto(element.element, after, char);
-                    return char;
+                return EMPTY;
+              }
+              case "Group":
+              case "CapturingGroup": {
+                let total = EMPTY;
+                for (const alt of element.alternatives) {
+                  if (alt.elements.length > 0) {
+                    total = total.union(tryReachUntil(alt.elements[0], char, after));
                   } else {
-                    return goInto(element.element, after, char);
+                    total = char;
                   }
                 }
-                default:
-                  return EMPTY;
+                return total;
+              }
+              case "Character":
+              case "CharacterClass":
+              case "CharacterSet": {
+                return char.intersect(toCharSet(element));
+              }
+              case "Quantifier": {
+                if (element.min === 0) {
+                  goInto(element.element, after, char);
+                  return char;
+                } else {
+                  return goInto(element.element, after, char);
+                }
+              }
+              default:
+                return EMPTY;
               }
             }
-          },
+          }
         });
 
         polyBacktrackingCache[patternStr] = false;

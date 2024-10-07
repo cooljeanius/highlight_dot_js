@@ -71,8 +71,7 @@ export default function(hljs) {
           + "|(BF|bf)16"
           + "|[Ll]"
           + "|" // Literal suffix is optional.
-        + ")"
-      },
+        + ")" },
       // Integer literal.
       { begin:
         "[+-]?\\b(?:" // Leading sign.

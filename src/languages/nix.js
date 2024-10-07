@@ -64,7 +64,10 @@ export default function(hljs) {
   };
   const STRING = {
     className: 'string',
-    contains: [ ESCAPED_DOLLAR, ANTIQUOTE ],
+    contains: [
+      ESCAPED_DOLLAR,
+      ANTIQUOTE
+    ],
     variants: [
       {
         begin: "''",

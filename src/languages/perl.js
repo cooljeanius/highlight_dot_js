@@ -274,8 +274,7 @@ export default function(hljs) {
         // negative look-ahead tries to avoid matching patterns that are not
         // Perl at all like $ident$, @ident@, etc.
         `(?![A-Za-z])(?![@$%])`
-      )
-      },
+      ) },
       {
         // Only $= is a special Perl variable and one can't declare @= or %=.
         begin: /[$%@](?!")[^\s\w{=]|\$=/,
@@ -460,7 +459,10 @@ export default function(hljs) {
       end: '(\\s*\\(.*?\\))?[;{]',
       excludeEnd: true,
       relevance: 5,
-      contains: [ hljs.TITLE_MODE, ATTR ]
+      contains: [
+        hljs.TITLE_MODE,
+        ATTR
+      ]
     },
     {
       className: 'class',
@@ -468,7 +470,11 @@ export default function(hljs) {
       end: '[;{]',
       excludeEnd: true,
       relevance: 5,
-      contains: [ hljs.TITLE_MODE, ATTR, NUMBER ]
+      contains: [
+        hljs.TITLE_MODE,
+        ATTR,
+        NUMBER
+      ]
     },
     {
       begin: '-\\w\\b',

@@ -90,7 +90,7 @@ export default function(hljs) {
   const NAME = {
     className: 'name',
     relevance: 0,
-    keywords: keywords,
+    keywords,
     begin: SYMBOL_RE,
     starts: BODY
   };

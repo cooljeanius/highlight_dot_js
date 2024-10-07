@@ -187,7 +187,7 @@ function check_group(group, rules) {
   }
 }
 
-const round2 = (x) => Math.round(x*100)/100;
+const round2 = (x) => Math.round(x * 100) / 100;
 
 class CSSRule {
   constructor(rule, body) {
@@ -197,7 +197,7 @@ class CSSRule {
       if (!this.bg) {
         this.bg = rule.declarations.find(x => x.property == "background")?.value;
       }
-      this.fg = rule.declarations.find(x => x.property =="color")?.value;
+      this.fg = rule.declarations.find(x => x.property == "color")?.value;
 
       if (this.bg) {
         this.bg = csscolors[this.bg] || this.bg;
@@ -213,24 +213,27 @@ class CSSRule {
       }
     }
   }
+
   get background() {
-    return this.bg
+    return this.bg;
   }
 
   get foreground() {
-    return this.fg
+    return this.fg;
   }
+
   get hasColor() {
     if (!this.rule.declarations) return false;
     return this.fg || this.bg;
   }
+
   toString() {
-    return ` ${this.foreground} on ${this.background}`
+    return ` ${this.foreground} on ${this.background}`;
   }
 
   contrastRatio() {
-    if (!this.foreground) return "unknown (no fg)"
-    if (!this.background) return "unknown (no bg)"
+    if (!this.foreground) return "unknown (no fg)";
+    if (!this.background) return "unknown (no bg)";
     return round2(wcagContrast.hex(this.foreground, this.background));
   }
 }
@@ -238,10 +241,10 @@ class CSSRule {
 function contrast_report(rules) {
   console.log("Accessibility Report".yellow);
 
-  var hljs = rules.find (x => x.selectors && x.selectors.includes(".hljs"));
-  var body = new CSSRule(hljs);
+  const hljs = rules.find(x => x.selectors && x.selectors.includes(".hljs"));
+  const body = new CSSRule(hljs);
   const table = new Table({
-    chars: {'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': ''},
+    chars: { mid: '', 'left-mid': '', 'mid-mid': '', 'right-mid': '' },
     head: ['ratio', 'selector', 'fg', 'bg'],
     colWidths: [7, 40, 10, 10],
     style: {
@@ -250,17 +253,17 @@ function contrast_report(rules) {
   });
 
   rules.forEach(rule => {
-    var color = new CSSRule(rule, body);
+    const color = new CSSRule(rule, body);
     if (!color.hasColor) return;
     table.push([
       color.contrastRatio(),
       rule.selectors,
       color.foreground,
       color.background
-    ])
+    ]);
     // console.log(r.selectors[0], color.contrastRatio(), color.toString());
-  })
-  console.log(table.toString())
+  });
+  console.log(table.toString());
 }
 
 function validate(data) {

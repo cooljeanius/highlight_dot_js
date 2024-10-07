@@ -186,7 +186,7 @@ export default function(hljs) {
 
   return {
     name: 'Scheme',
-    aliases: ['scm'],
+    aliases: [ 'scm' ],
     illegal: /\S/,
     contains: [
       hljs.SHEBANG(),

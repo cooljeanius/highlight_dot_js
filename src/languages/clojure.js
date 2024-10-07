@@ -112,7 +112,7 @@ export default function(hljs) {
     relevance: 0
   };
   const NAME = {
-    keywords: keywords,
+    keywords,
     className: 'name',
     begin: SYMBOL_RE,
     relevance: 0,

@@ -27,7 +27,7 @@ export default function(hljs) {
     name: 'ReasonML',
     aliases: [ 're' ],
     keywords: {
-      $pattern:  /[a-z_]\w*!?/,
+      $pattern: /[a-z_]\w*!?/,
       keyword: [
         "and",
         "as",
@@ -86,7 +86,10 @@ export default function(hljs) {
         "with",
       ],
       built_in: BUILT_IN_TYPES,
-      literal: ["true", "false"],
+      literal: [
+        "true",
+        "false"
+      ],
     },
     illegal: /(:-|:=|\$\{|\+=)/,
     contains: [
@@ -112,14 +115,14 @@ export default function(hljs) {
         relevance: 0
       },
       { /* don't color identifiers, but safely catch all identifiers with ' */
-      match: /[a-z_]\w*\'[\w\']*/,
+        match: /[a-z_]\w*\'[\w\']*/,
         relevance: 0
       },
       {
         scope: 'operator',
         match: /\s+(\|\||\+[\+\.]?|\*[\*\/\.]?|\/[\.]?|\.\.\.|\|>|&&|===?)\s+/,
         relevance: 0
-      },      
+      },
       hljs.inherit(hljs.APOS_STRING_MODE, {
         scope: 'string',
         relevance: 0

@@ -9,7 +9,7 @@ const API = [
   "highlightElement"
 ];
 
-const assert = (f,msg) => {
+const assert = (f, msg) => {
   if (!f()) {
     console.error(msg);
     process.exit(1);
@@ -22,12 +22,12 @@ API.forEach(n => {
 });
 
 // See e.g. highlightjs/highlight.js#3263
-const langs = ["python", "python-repl"]
+const langs = ["python", "python-repl"];
 langs.forEach(n => {
   assert(_ => {
     res = hljs.getLanguage(n);
-    return typeof res === 'object' && res !== null
-  })
-})
+    return typeof res === 'object' && res !== null;
+  });
+});
 
-console.log("Pass: browser build works with Node.js just fine.")
+console.log("Pass: browser build works with Node.js just fine.");

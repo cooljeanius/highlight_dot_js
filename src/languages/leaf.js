@@ -43,9 +43,7 @@ export default function(hljs) {
       IDENT,
       /(?=\()/,
     ],
-    scope: {
-      1: "keyword"
-    },
+    scope: { 1: "keyword" },
     contains: [ PARAMS ]
   };
   PARAMS.contains.unshift(INSIDE_DISPATCH);
@@ -65,17 +63,13 @@ export default function(hljs) {
         },
         // will start up after the ending `)` match from line ~44
         // just to grab the trailing `:` if we can match it
-        starts: {
-          contains: [
-            {
-              match: /\:/,
-              scope: "punctuation"
-            }
-          ]
-        },
-        contains: [
-          PARAMS
-        ],
+        starts: { contains: [
+          {
+            match: /\:/,
+            scope: "punctuation"
+          }
+        ] },
+        contains: [ PARAMS ],
       },
       // #ident or #ident:
       {

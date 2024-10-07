@@ -633,13 +633,13 @@ export default function(hljs) {
       /\b/,
       // @ts-ignore
       regex.either(...list.map((kw) => {
-        return kw.replace(/\s+/, "\\s+")
+        return kw.replace(/\s+/, "\\s+");
       }
       )
       ),
       /\b/
-    )
-  };
+    );
+  }
 
   const MULTI_WORD_KEYWORDS = {
     scope: "keyword",
