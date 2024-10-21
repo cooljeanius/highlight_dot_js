@@ -8,7 +8,7 @@
 #
 #   And open a browser to http://localhost:8080
 
-FROM node:22-slim
+FROM node:23-slim
 RUN apt-get update -qq \
     && apt-get install --yes --no-install-recommends \
         nginx git \
